@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace WpfApp4.Models
+namespace LibraryManagement.Models
 {
     public class Member : ObservableObject
     {

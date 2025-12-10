@@ -11,10 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfApp4.Models;
-using WpfApp4.ViewModels;
+using LibraryManagement.Models;
+using LibraryManagement.Services;
+using LibraryManagement.ViewModels;
 
-namespace WpfApp4.Views
+namespace LibraryManagement.Views
 {
     /// <summary>
     /// Interaction logic for MembersCardView.xaml
@@ -22,10 +23,10 @@ namespace WpfApp4.Views
     public partial class MembersCardView : Window
     {
         public Member ReturnMember;
-        public MembersCardView(Member target)
+        public MembersCardView(Member target, DataService ds)
         {
             InitializeComponent();
-            var vm = new MembersCardViewModel(target);
+            var vm = new MembersCardViewModel(target, ds);
             DataContext = vm;
             vm.RequestClose += () =>
             {

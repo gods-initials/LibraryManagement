@@ -11,11 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfApp4.ViewModels;
-using WpfApp4.Models;
-using WpfApp4.Services;
+using LibraryManagement.ViewModels;
+using LibraryManagement.Models;
+using LibraryManagement.Services;
 
-namespace WpfApp4.Views
+namespace LibraryManagement.Views
 {
     /// <summary>
     /// Interaction logic for BooksCardView.xaml
@@ -34,6 +34,11 @@ namespace WpfApp4.Views
                 ReturnBook = vm.ReturnBook;
                 Close();
             };
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

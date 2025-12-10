@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WpfApp4.Models;
-using WpfApp4.Services;
-using WpfApp4.Views;
+using LibraryManagement.Models;
+using LibraryManagement.Services;
+using LibraryManagement.Views;
 
-namespace WpfApp4.ViewModels
+namespace LibraryManagement.ViewModels
 {
     internal class MembersTableViewModel : ObservableObject
     {
@@ -42,7 +42,7 @@ namespace WpfApp4.ViewModels
         private void Add()
         {
             Member newMember = new Member();
-            var a = new MembersCardView(newMember);
+            var a = new MembersCardView(newMember, _dataService);
             var success = a.ShowDialog();
             if (success == true)
             {
@@ -55,7 +55,7 @@ namespace WpfApp4.ViewModels
         }
         private void Edit()
         {
-            var a = new MembersCardView(SelectedMember);
+            var a = new MembersCardView(SelectedMember, _dataService);
             var success = a.ShowDialog();
             if (success == true)
             {

@@ -8,9 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp4.ViewModels;
+using LibraryManagement.ViewModels;
 
-namespace WpfApp4.Native
+namespace LibraryManagement.Native
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

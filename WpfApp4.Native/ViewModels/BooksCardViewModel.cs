@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WpfApp4.Models;
-using WpfApp4.Services;
+using LibraryManagement.Models;
+using LibraryManagement.Services;
 
-namespace WpfApp4.ViewModels
+namespace LibraryManagement.ViewModels
 {
     public class BooksCardViewModel : ObservableObject
     {
@@ -28,18 +30,47 @@ namespace WpfApp4.ViewModels
             get => _selectedMember;
             set
             {
-                SetProperty(ref _selectedMember, value);
-                ReturnBook.BorrowerId = value.Id;
+                if (SetProperty(ref _selectedMember, value))
+                {
+                    if (value==null)
+                        ReturnBook.BorrowerId = null;
+                    else
+                        ReturnBook.BorrowerId = value.Id;
+                }
+                ReturnCommand?.NotifyCanExecuteChanged();
             }
         }
+        public string TagsString { get; set; }
         public RelayCommand OKCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
+        public RelayCommand ReturnCommand { get; set; }
         public event Action RequestClose;
+        public void Return()
+        {
+            SelectedMember = null;
+            ReturnBook.DueTo = null;
+        }
+        public bool CanReturn()
+        {
+            return SelectedMember != null;
+        }
+        private string GetTagsString()
+        {
+            var sb = new StringBuilder();
+            foreach (Tag tag in ReturnBook.Tags)
+            {
+                sb.Append(tag.TagName);
+                sb.Append("; ");
+            }
+            return sb.ToString();
+
+        }
         public BooksCardViewModel(Book target, DataService ds)
         {
             dataService = ds;
             AvailableMembers = new ObservableCollection<Member>(ds.Members);
-            ReturnBook = new Book() { Id = target.Id, Author = target.Author, Title = target.Title, BorrowerId=target.BorrowerId};
+            ReturnBook = new Book(target);
+            TagsString = GetTagsString();
             if (target.BorrowerId != null)
                 SelectedMember = AvailableMembers.Where(x => x.Id == target.BorrowerId).First();
             CancelCommand = new RelayCommand(() =>
@@ -49,9 +80,17 @@ namespace WpfApp4.ViewModels
             });
             OKCommand = new RelayCommand(() =>
             {
-                Success = true;
-                RequestClose?.Invoke();
+                if (ReturnBook.BorrowerId != null && ReturnBook.DueTo==null)
+                {
+                    MessageBox.Show("return when?");
+                }
+                else
+                {
+                    Success = true;
+                    RequestClose?.Invoke();
+                }
             });
+            ReturnCommand = new RelayCommand(Return, CanReturn);
         }
     }
 }

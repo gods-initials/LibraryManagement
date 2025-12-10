@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WpfApp4.Views;
-using WpfApp4.Models;
-using WpfApp4.Services;
+using LibraryManagement.Views;
+using LibraryManagement.Models;
+using LibraryManagement.Services;
 
-namespace WpfApp4.ViewModels
+namespace LibraryManagement.ViewModels
 {
     internal class BooksTableViewModel : ObservableObject
     {
@@ -64,6 +64,7 @@ namespace WpfApp4.ViewModels
                 SelectedBook.Author = a.ReturnBook.Author;
                 SelectedBook.Title = a.ReturnBook.Title;
                 SelectedBook.BorrowerId = a.ReturnBook.BorrowerId;
+                SelectedBook.DueTo = a.ReturnBook.DueTo;
             }
         }
         private void Remove()

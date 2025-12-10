@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace WpfApp4.Native
+namespace LibraryManagement.Native
 {
     /// <summary>
     /// Interaction logic for App.xaml

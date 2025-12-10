@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace WpfApp4.Models
+namespace LibraryManagement.Models
 {
     public class Book : ObservableObject
     {
@@ -33,6 +34,31 @@ namespace WpfApp4.Models
         {
             get => _borrowerId;
             set => SetProperty(ref _borrowerId, value);
+        }
+        private DateTime? _dueTo;
+        public DateTime? DueTo
+        {
+            get => _dueTo;
+            set => SetProperty(ref _dueTo, value);
+        }
+        private ObservableCollection<Tag> _tags;
+        public ObservableCollection<Tag> Tags
+        {
+            get => _tags;
+            set => SetProperty(ref _tags, value);
+        } 
+        public Book() 
+        {
+            Tags = new ObservableCollection<Tag>();
+        }
+        public Book(Book target)
+        {
+            this.Id = target.Id;
+            this.Title = target.Title;
+            this.Author = target.Author;
+            this.BorrowerId = target.BorrowerId;
+            this.DueTo = target.DueTo;
+            this.Tags = target.Tags;
         }
         public override string ToString() => $"Id: {Id}, Title: {Title}, Author: {Author}, Borrowed by: {BorrowerId}";
     }

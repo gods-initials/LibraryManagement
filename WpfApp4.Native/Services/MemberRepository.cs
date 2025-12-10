@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using WpfApp4.Models;
+using LibraryManagement.Models;
 
-namespace WpfApp4.Services
+namespace LibraryManagement.Services
 {
     internal class MemberRepository
     {

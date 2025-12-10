@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WpfApp4.Services;
+using LibraryManagement.Services;
 
-namespace WpfApp4.ViewModels
+namespace LibraryManagement.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
